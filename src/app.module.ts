@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, LoggerService, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LocationsModule } from './locations/locations.module';
@@ -6,6 +6,8 @@ import { CommonModule } from './common/common.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Location } from './locations/entities/locations.entities';
 import { ConfigModule } from '@nestjs/config';
+import { AppLogger } from './common/logger.service';
+import { RequestLoggerMiddleware } from './common/request-logger.middleware';
 
 @Module({
   imports: [
@@ -25,6 +27,11 @@ import { ConfigModule } from '@nestjs/config';
     CommonModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AppLogger],
+  exports: [AppLogger],
 })
-export class AppModule { }
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(RequestLoggerMiddleware).forRoutes('*'); // ✅ Logs every request
+  }
+}
