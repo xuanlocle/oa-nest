@@ -44,6 +44,13 @@ npm start
 Swagger UI available at:  
 🔗 **[http://localhost:3000/api](http://localhost:3000/api)**
 
+
+### **2.4 Online Deployment**
+
+I have deployed an online version at:
+API Base URL: https://oa-nest.onrender.com/
+Swagger Documentation: https://oa-nest.onrender.com/api
+
 ---
 
 ## **3. API Endpoints**
