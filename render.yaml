@@ -1,0 +1,11 @@
+services:
+  - name: nestjs-api
+    type: web
+    env: docker
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: PORT
+        value: 3000
+    autoDeploy: true

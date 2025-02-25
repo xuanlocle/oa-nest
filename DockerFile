@@ -1,0 +1,20 @@
+# Use Node.js LTS Alpine for smaller image
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the project
+COPY . .
+
+# Expose the port (Render uses 10000+ ports)
+EXPOSE 3000
+
+# Run the application
+CMD ["npm", "run", "start:prod"]
